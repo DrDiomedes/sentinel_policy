@@ -1,0 +1,9 @@
+import "tfplan/v2" as tfplan
+
+main = rule {
+  all tfplan.resource_changes as rc {
+    rc.type is "aws_s3_bucket" and
+    rc.change.after.public_access_block.block_public_acls is true and
+    rc.change.after.public_access_block.block_public_policy is true
+  }
+}
